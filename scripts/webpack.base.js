@@ -1,5 +1,7 @@
 const { getEntry } = require('./utils');
 const baseConfig = getEntry();
+require('dotenv').config();
+
 module.exports = {
   entry: baseConfig.entry,
   output: baseConfig.output,
