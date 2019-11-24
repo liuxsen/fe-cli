@@ -1,3 +1,9 @@
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+
+// npm install extract-text-webpack-plugin@next -S 
+// npm install extract-text-webpack-plugin -S 会报错
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 const { getEntry } = require('./utils');
 const baseConfig = getEntry();
 require('dotenv').config();
@@ -18,14 +24,12 @@ module.exports = {
         loader: ['babel-loader']
       },
       {
-        test: /\.css$/,
+        test: /\.(le|c)ss$/,
         exclude: /node_modules/,
-        loader: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.less$/,
-        exclude: /node_modules/,
-        loader: ['style-loader', 'css-loader', 'less-loader']
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader','less-loader']
+        })
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -48,6 +52,8 @@ module.exports = {
     ]
   },
   plugins: [
-    ...baseConfig.htmlWebpackPlugins
+    ...baseConfig.htmlWebpackPlugins,
+    new CleanWebpackPlugin(),
+    new ExtractTextPlugin('style_[name].css')
   ]
 };

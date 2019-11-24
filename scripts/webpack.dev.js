@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'develepment';
+
 const {appPath} = require('./utils');
 const merge = require('webpack-merge');
 const webpack = require('webpack');
