@@ -16,7 +16,7 @@ const getEntry = function () {
     htmlWebpackPlugins.push(new HTMLWebpackPlugin({
       template: `${dirPath}/${dir}/index.html`,
       filename: `${dir}/index.html`,
-      chunks: [dir, 'common', 'vendor'],
+      chunks: ['vendors', 'commons', dir],
       favicon: `${dirPath}/${dir}/favicon.ico`
     }));
   });
