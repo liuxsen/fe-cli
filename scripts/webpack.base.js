@@ -2,13 +2,18 @@ const { getEntry } = require('./utils');
 const baseConfig = getEntry();
 require('dotenv').config();
 
+console.log(baseConfig);
+
 module.exports = {
   entry: baseConfig.entry,
   output: baseConfig.output,
+  resolve: {
+    extensions: ['.jsx', '.js', '.json']
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.js|x$/,
         exclude: /node_modules/,
         loader: ['babel-loader']
       },

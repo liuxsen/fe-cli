@@ -1,6 +1,6 @@
 const fs = require('fs');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const dirPath = process.cwd()+'/template/src/pages';
+const dirPath = process.cwd()+'/src/pages';
 const subDir = fs.readdirSync(dirPath);
 const cwdPath = process.cwd();
 
@@ -19,7 +19,7 @@ const getEntry = function () {
   const output = {
     path: cwdPath + '/dist',
     filename: `[name]/index.js`,
-    publicPath: '/'
+    publicPath: '/' // htmlwebpackplugin生成的路径前缀
   };
   return {
     entry,
@@ -31,7 +31,7 @@ const getEntry = function () {
 const res =getEntry();
 console.log(res);
 
-const appPath = process.cwd() + '/template/src';
+const appPath = process.cwd() + '/src';
 
 exports.getEntry = getEntry;
 exports.appPath = appPath;
