@@ -1,4 +1,5 @@
 // isProd 值是字符串
+const isProd = process.env.NODE_ENV === 'production';
 
 const fs = require('fs');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
@@ -6,7 +7,6 @@ const dirPath = process.cwd()+'/src/pages';
 const subDir = fs.readdirSync(dirPath);
 const cwdPath = process.cwd();
 
-export const isProd = process.env.NODE_ENV === 'production';
 
 const getEntry = function () {
   const entry = {};

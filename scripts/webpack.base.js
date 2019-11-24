@@ -1,8 +1,8 @@
+const devMode = process.env.NODE_ENV === 'development';
+console.log('devMOde', devMode);
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-
-// npm install extract-text-webpack-plugin@next -S 
-// npm install extract-text-webpack-plugin -S 会报错
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// 提取css
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { getEntry } = require('./utils');
 const baseConfig = getEntry();
@@ -26,10 +26,11 @@ module.exports = {
       {
         test: /\.(le|c)ss$/,
         exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader','less-loader']
-        })
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'less-loader'
+        ]
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -54,6 +55,11 @@ module.exports = {
   plugins: [
     ...baseConfig.htmlWebpackPlugins,
     new CleanWebpackPlugin(),
-    new ExtractTextPlugin('style_[name].css')
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: devMode ? '/css/[name].css' : 'css/[name].[contenthash:8].css',
+      chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[contenthash:8].css',
+    })
   ]
 };
