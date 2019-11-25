@@ -1,6 +1,5 @@
 const devMode = process.env.NODE_ENV === 'development';
 console.log('devMOde', devMode);
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 // 提取css
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -54,7 +53,7 @@ module.exports = {
   },
   plugins: [
     ...baseConfig.htmlWebpackPlugins,
-    new CleanWebpackPlugin(),
+    
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional

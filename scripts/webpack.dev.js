@@ -2,7 +2,6 @@ process.env.NODE_ENV = 'develepment';
 
 const {appPath} = require('./utils');
 const merge = require('webpack-merge');
-const webpack = require('webpack');
 const baseConfig = require('./webpack.base');
 
 const devConfig = merge(baseConfig, {
@@ -10,8 +9,9 @@ const devConfig = merge(baseConfig, {
   devtool: 'inline-source-map',
   devServer: {
     hot: true,
+    publicPath: '/', // 打包的文件放在的目录
     disableHostCheck: false,
-    contentBase: appPath+'/static',
+    contentBase: appPath,
     historyApiFallback: {
       rewrites: [
         // { from: /^\/$/, to: '/views/landing.html' },
@@ -21,8 +21,6 @@ const devConfig = merge(baseConfig, {
     }
   },
   plugins: [
-    // new webpack.HotModuleReplacementPlugin({
-    // })
   ]
 });
 
