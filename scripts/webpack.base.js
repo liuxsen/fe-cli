@@ -20,7 +20,10 @@ module.exports = {
       {
         test: /\.js|x$/,
         exclude: /node_modules/,
-        loader: ['babel-loader']
+        loader: [
+          'babel-loader',
+          'astroturf/loader'
+        ]
       },
       {
         test: /\.(le|c)ss$/,
@@ -28,7 +31,8 @@ module.exports = {
         use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
-          'less-loader'
+          'postcss-loader',
+          'less-loader',
         ]
       },
       {
@@ -53,7 +57,6 @@ module.exports = {
   },
   plugins: [
     ...baseConfig.htmlWebpackPlugins,
-    
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional

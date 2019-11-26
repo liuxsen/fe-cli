@@ -15,7 +15,12 @@ export default class Child extends Component {
   render () {
     console.log(1);
     return (
-    <div id="header">{ this.state.a }</div>
+      <div>
+        <div id="header">
+          { this.state.a }
+        </div>
+        <div style={{width: '375px'}}  />
+      </div>
     );
   }
 }

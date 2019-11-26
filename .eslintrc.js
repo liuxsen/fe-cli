@@ -21,6 +21,8 @@ module.exports = {
   },
   rules: {
       // 这里填入你的项目需要的个性化配置
-    "semi": ["error"]
+    "semi": ["error"],
+    // 空格
+    "indent": ["error", 2]
   }
 };
