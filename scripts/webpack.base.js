@@ -13,7 +13,8 @@ module.exports = {
   entry: baseConfig.entry,
   output: baseConfig.output,
   resolve: {
-    extensions: ['.jsx', '.js', '.json']
+    mainFiles: ['index'], // 解析目录时，要使用的文件名
+    extensions: ['.jsx', '.js', '.json'], // 解析文件时，使用的文件后缀
   },
   module: {
     rules: [
