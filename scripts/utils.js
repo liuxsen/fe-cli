@@ -11,6 +11,7 @@ const cwdPath = process.cwd();
 const getEntry = function () {
   const entry = {};
   const htmlWebpackPlugins = [];
+  const historyApiFallbackRewrites  = [];
   subDir.forEach((dir)=>{
     entry[dir] = `${dirPath}/${dir}/index.js`;
     htmlWebpackPlugins.push(new HTMLWebpackPlugin({
@@ -19,6 +20,11 @@ const getEntry = function () {
       chunks: ['vendors', 'commons', dir],
       favicon: `${dirPath}/${dir}/favicon.ico`
     }));
+    // 开发模式，404 fallback
+    historyApiFallbackRewrites.push({
+      form: new RegExp("^\/" + dir,"gim"),
+      to: `/${dir}/index.html`
+    });
   });
   const output = {
     path: cwdPath + '/dist',
@@ -28,12 +34,10 @@ const getEntry = function () {
   return {
     entry,
     output,
-    htmlWebpackPlugins
+    htmlWebpackPlugins,
+    historyApiFallbackRewrites
   };
 };
-
-const res =getEntry();
-console.log(res);
 
 const appPath = process.cwd() + '/src';
 

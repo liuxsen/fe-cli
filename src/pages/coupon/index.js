@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import App from './components/app';
+import App from './app';
 
 // css
 import '../../static/css/atom-common.css';
