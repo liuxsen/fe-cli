@@ -14,6 +14,16 @@ const devConfig = merge(baseConfig, {
     contentBase: appPath,
     historyApiFallback: {
       rewrites: getEntry().historyApiFallbackRewrites
+    },
+    proxy: {
+      '/api': {
+        target: 'https://router.jd.com',
+        changeOrigin: true,
+      },
+      '/v1': {
+        target: 'https://cnodejs.org/api',
+        changeOrigin: true,
+      }
     }
   },
   plugins: [
